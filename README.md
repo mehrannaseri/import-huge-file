@@ -72,4 +72,3 @@ Then, run the following commands:
 - php artisan migrate
 - php artisan serve
 ```
-That's it!
