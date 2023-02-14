@@ -62,7 +62,7 @@ php artisan log:generate 10000000
 - Remember, I used a fixed file name 
 
 ## Installation
-I used php version 8.0 and mysql version 8
+I used php version 8.0, Laravel 9 and mysql version 8
 Just create your own database, clone the repository, open the project directory make your own **.env** file and set the keys inside it.
 
 Then, run the following commands:
