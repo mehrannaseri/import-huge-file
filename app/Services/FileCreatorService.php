@@ -86,6 +86,6 @@ class FileCreatorService
 
     public function createFile($logArr)
     {
-        Storage::append('public/logs.txt', implode("\n",$logArr));
+        Storage::put('public/logs.txt', implode("\n",$logArr));
     }
 }

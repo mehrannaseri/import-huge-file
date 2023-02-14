@@ -57,7 +57,7 @@ class FileReaderService
             $row = fgets($file);
             $this->counter++;
             $data[] =  $row;
-            if($this->counter != 0 && $this->counter % $this->limitter == 0){
+            if($this->counter != 0 && $this->counter % $this->limiter == 0){
                 $this->divisible = true;
                 $chunk = $data;
                 $data = [];
