@@ -27,14 +27,14 @@ class FileReaderService
     /**
      * @var int
      */
-    private int $limitter;
+    private int $limiter;
     private string $file_path;
 
     public function __construct()
     {
         $this->counter = 0;
         $this->divisible = false;
-        $this->limitter = 500;
+        $this->limiter = 500;
         $this->file_path = config('setting.log_file_path');
     }
 
