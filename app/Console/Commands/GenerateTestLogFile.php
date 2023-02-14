@@ -36,9 +36,13 @@ class GenerateTestLogFile extends Command
 
         $this->file_creator = new FileCreatorService($lines);
 
-        $this->file_creator->generateContent();
+        $data = $this->file_creator->generateContent();
         $this->file_creator->removeOldFile();
-        $this->file_creator->createFile();
+
+        foreach ($data as $log){
+            $this->file_creator->createFile($log);
+        }
+
 
         $this->info("Log file created successfully");
 

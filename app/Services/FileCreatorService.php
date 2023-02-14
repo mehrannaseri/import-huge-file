@@ -13,6 +13,12 @@ class FileCreatorService
      */
     private $content;
     private string $file_path;
+    private int $limiter;
+    /**
+     * @var false
+     */
+    private bool $divisible;
+    private int $counter;
 
     /**
      * @param $number_of_lines
@@ -21,15 +27,30 @@ class FileCreatorService
     {
 
         $this->number_of_lines = $number_of_lines;
-        $this->content = null;
+        $this->content = [];
         $this->file_path = config('setting.log_file_path');
+        $this->counter = 0;
+        $this->divisible = false;
+        $this->limiter = 500;
     }
 
     public function generateContent()
     {
+        $i = 0;
 
-        for($i = 0; $i <= $this->number_of_lines; $i++){
-            $this->content .= $this->createLogLine();
+        while($i < $this->number_of_lines){
+            $this->content[] = $this->createLogLine();
+            if($this->counter != 0 && $this->counter % $this->limiter == 0){
+                $this->divisible = true;
+                $chunk = $this->content;
+                $this->content = [];
+                yield $chunk;
+            }
+            $i++;
+        }
+
+        if(!$this->divisible){
+            yield $this->content;
         }
     }
 
@@ -52,7 +73,7 @@ class FileCreatorService
         $status_code = $status_codes->random();
 
         return $service['service-name'] . ' ' . "-" . ' [' . $date->format("d/M/Y:H:i:s") . '] ' . '"' . 'POST ' . $service['path']
-            . ' HTTP/1.1' . '" ' . $status_code."\n";
+            . ' HTTP/1.1' . '" ' . $status_code;
     }
 
     public function removeOldFile()
@@ -63,8 +84,8 @@ class FileCreatorService
         }
     }
 
-    public function createFile()
+    public function createFile($logArr)
     {
-        Storage::append('public/logs.txt', $this->content);
+        Storage::append('public/logs.txt', implode("\n",$logArr));
     }
 }
