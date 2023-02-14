@@ -28,12 +28,14 @@ class FileReaderService
      * @var int
      */
     private int $limitter;
+    private string $file_path;
 
     public function __construct()
     {
         $this->counter = 0;
         $this->divisible = false;
         $this->limitter = 500;
+        $this->file_path = config('setting.log_file_path');
     }
 
     /**
@@ -43,7 +45,7 @@ class FileReaderService
      */
     public function readFile() :Generator
     {
-        $file_path = storage_path('app/public/logs.txt');
+        $file_path = storage_path($this->file_path);
         if(! file_exists($file_path)){
             throw new Exception('file does not exists');
         }
