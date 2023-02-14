@@ -44,7 +44,9 @@ class LogService
                     'status_code' => (int)$data[6],
                     'uri' => $data[4],
                     'method' => $data[3],
-                    'http_version' => $data[5]
+                    'http_version' => $data[5],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
             }
         }
