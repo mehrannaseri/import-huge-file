@@ -34,6 +34,8 @@ class ImportLogFile extends Command
         try{
             $start_time = time();
 
+            $this->alert("Importing file started, please wait...");
+
             $file_reader = new FileReaderService();
             $log_data = $file_reader->readFile();
 
