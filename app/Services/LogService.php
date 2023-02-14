@@ -38,6 +38,8 @@ class LogService
             if($data != ''){
                 $data = str_replace("\"", "", $data);
                 $data = explode(' ', $data);
+
+                $now = now()->toDateTimeString();
                 $clean_data[] = [
                     'service_name' => $data[0],
                     'date' => $this->cleanDate($data[2]),
@@ -45,8 +47,8 @@ class LogService
                     'uri' => $data[4],
                     'method' => $data[3],
                     'http_version' => $data[5],
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => $now,
+                    'updated_at' => $now,
                 ];
             }
         }
