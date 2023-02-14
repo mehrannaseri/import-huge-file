@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Exception;
+use Generator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -37,10 +38,10 @@ class FileReaderService
 
     /**
      * get and read file
-     * @return \Generator
+     * @return Generator
      * @throws Exception
      */
-    public function readFile()
+    public function readFile() :Generator
     {
         $file_path = storage_path('app/public/logs.txt');
         if(! file_exists($file_path)){
