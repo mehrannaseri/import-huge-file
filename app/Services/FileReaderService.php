@@ -65,6 +65,7 @@ class FileReaderService
             }
         }
 
+        //what if the file rows not divisible?
         if(!$this->divisible){
             yield $data;
         }

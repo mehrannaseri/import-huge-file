@@ -49,6 +49,7 @@ class FileCreatorService
             $i++;
         }
 
+        //what if the file rows not divisible?
         if(!$this->divisible){
             yield $this->content;
         }
