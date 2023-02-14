@@ -20,6 +20,12 @@ class LogService
         return true;
     }
 
+
+    public function show($request)
+    {
+        return Log::filter($request)->count();
+    }
+
     /**
      * prepare data for insert on database
      * @param $dataArr
